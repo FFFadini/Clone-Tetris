@@ -250,7 +250,7 @@ function arenaSweep() {
     }
     if (linesCleared > 0) {
         let scoreToAdd = linesCleared * 100;
-        if (linesCleared === 1) {
+        if (linesCleared === 4) {
             scoreToAdd = 800;
             triggerTetrisEffects();
         }
