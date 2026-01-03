@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Vector Tetris Deluxe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container" id="main-shaker">
+        
+        <div id="tetris-pop-text" class="pop-text hidden">TETRIS!</div>
+
+        <div id="game-over-overlay" class="hidden">
+            <h1 class="neon-title">GAME OVER</h1>
+            <p>Score Final: <span id="final-score">0000</span></p>
+            <button id="restart-btn">JOGAR NOVAMENTE</button>
+        </div>
+
+        <div class="game-wrapper">
+            <div class="ui-panel left-panel">
+                <div class="stat-row">
+                    <span class="label">PONTOS</span>
+                    <span id="score">0000</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">NÍVEL</span>
+                    <span id="level">1</span>
+                </div>                
+            </div>
+
+            <div class="controls-hint">
+                <p>Setas: Mover/Girar</p>
+                <p>Baixo: Descer</p>
+            </div>
+
+            <canvas id="tetris" width="480" height="800"></canvas>
+
+            <div class="ui-panel right-panel">
+                <div class="stat-row">
+                    <span class="prox">PRÓXIMO</span>
+                </div>
+                <canvas id="next" width="200" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

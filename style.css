@@ -1,0 +1,198 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-container {
+    position: relative;
+}
+
+/* --- ESTILOS DO GAME OVER --- */
+#game-over-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.80); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    gap: 20px;
+    backdrop-filter: blur(2px);
+}
+
+.neon-title {
+    font-size: 3rem;
+    color: #FF0D72; 
+    text-shadow: 
+        0 0 1px #FF0D72,
+        0 0 2px #FF0D72,
+        0 0 20px #FF0D72,
+        0 0 50px #FF0D72;
+}
+
+#game-over-overlay p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+/* Botão Retro Neon */
+#restart-btn {
+    background: transparent;
+    border: 2px solid #0DC2FF; 
+    color: #0DC2FF;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px #0DC2FF, inset 0 0 10px #0DC2FF;
+    text-shadow: 0 0 5px #0DC2FF;
+    transition: all 0.2s ease-in-out;
+}
+
+#restart-btn:hover {
+    background-color: #0DC2FF;
+    color: #000;
+    box-shadow: 0 0 20px #0DC2FF, inset 0 0 20px #0DC2FF;
+    text-shadow: none;
+    transform: scale(1.05);
+}
+
+/* --- FIM ESTILOS GAME OVER --- */
+.game-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    z-index: 1;
+}
+
+/* Painéis laterais */
+.ui-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 120px;
+}
+
+.left-panel {
+    text-align: right;
+}
+
+.right-panel {
+    text-align: left;
+    align-items: center;
+}
+
+.stat-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.stat-row .label {
+    font-size: 20px;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+.prox{
+    font-size: 20px;
+    color: #aaa;
+}
+
+.stat-row span:not(.label) {
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px #fff;
+}
+
+.controls-hint {
+    position: absolute;
+    margin-top: 750px;
+    left: -40px;
+    font-size: 15px;
+    color: #666;
+}
+
+/* Canvas */
+#tetris {
+    border: 2px solid #0f0;
+    border-radius: 5px;
+    background-color: #000;
+    box-shadow: 0 0 15px #0f0, inset 0 0 10px rgba(0, 255, 0, 0.2);
+    display: block;
+}
+
+#next {
+    border: 1px solid #444;
+    background-color: #000;
+    box-shadow: 0 0 5px #444;
+    margin-top: 5px;
+    margin-left: 65px;
+}
+
+/* EFEITOS */
+.pop-text {
+    position: absolute;
+    top: 50%;
+    left: 53%;
+    transform: translate(-50%, -50%) scale(0.5);
+    font-size: 4rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #FF0D72, 0 0 30px #FF0D72, 0 0 40px #0DC2FF, 0 0 70px #0DC2FF;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.hidden { display: none !important; /* Importante para garantir que suma */ }
+
+.pop-text.show {
+    display: block;
+    animation: fadePop 1.5s forwards;
+}
+
+.shake-active {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadePop {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
