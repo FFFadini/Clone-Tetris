@@ -204,125 +204,133 @@ body {
     display: none;
 }
 
+/* --- OTIMIZAÇÃO MOBILE (CORRIGIDA) --- */
 @media (max-width: 800px) {
     body {
-        /* Garante que o corpo ocupe 100% sem rolar */
-        height: 100vh;
-        width: 100vw;
-        align-items: flex-start; /* Começa do topo */
-        padding-top: 10px;
+        /* Garante tela cheia sem rolagem */
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
     }
 
     .main-container {
         display: flex;
         flex-direction: column;
-        height: 100%;
+        justify-content: center; /* Centraliza verticalmente */
+        align-items: center;     /* Centraliza horizontalmente */
         width: 100%;
-        justify-content: space-between; /* Espalha: Topo, Meio, Baixo */
+        height: 100%;
+        gap: 10px; /* Espaço entre HUD, Jogo e Botões */
     }
 
-    /* 1. O JOGO (Área Central) */
     .game-wrapper {
         display: flex;
-        flex-direction: column; /* Empilha verticalmente */
+        flex-direction: column;
         align-items: center;
         width: 100%;
-        flex-grow: 1; /* Ocupa o espaço disponível */
-        gap: 5px;
-        order: 1; /* Fica no topo visualmente (contendo a HUD e o Jogo) */
+        order: 1; 
     }
 
-    /* 2. A HUD (Placar e Próximo) - Agora compacta no topo */
+    /* --- 1. HUD (Placar e Próximo) --- */
+    /* Organiza Pontos, Próximo e Nível numa linha só no topo */
     .ui-panel {
         width: 100%;
-        flex-direction: row; /* Coloca lado a lado */
+        flex-direction: row;
         justify-content: center;
         align-items: center;
         gap: 15px;
-        padding: 0 10px;
-        margin: 0;
-    }
-
-    /* Força os painéis a se comportarem como uma barra superior */
-    .left-panel, .right-panel {
-        width: auto; /* Largura automática */
-        text-align: center;
         margin-bottom: 5px;
     }
-    
-    /* Esconde rótulos desnecessários para economizar espaço */
+
+    .left-panel, .right-panel {
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Esconde rótulos desnecessários para limpar a tela */
     .prox, .stat-row .label {
-        font-size: 0.7rem; /* Texto bem pequeno */
+        font-size: 0.6rem;
         margin-bottom: 0;
+        display: block; /* Mantém o texto pequeno acima do número */
     }
 
     .stat-row {
-        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        margin: 0;
     }
 
     .stat-row span:not(.label) {
-        font-size: 1.2rem; /* Números menores */
-        line-height: 1;
+        font-size: 1.2rem;
     }
 
-    /* Reduz drasticamente o canvas "Próximo" */
+    /* Canvas da Próxima Peça (Pequeno) */
     #next {
-        width: 60px; /* Bem menor */
-        height: 60px;
+        width: 50px;
+        height: 50px;
         margin: 0;
-        margin-left: 10px;
         border: 1px solid #333;
+        background: #000;
     }
 
-    /* O Canvas Principal do Jogo */
+    /* --- 2. JOGO (Correção da Proporção) --- */
     #tetris {
-        /* Altura dinâmica para caber na tela sem rolar */
-        height: auto;
-        max-height: 55vh; /* Ocupa no máximo 55% da altura da tela */
-        aspect-ratio: 12/20; /* Mantém proporção correta */
-        margin: 0 auto;
+        /* O SEGREDO ESTÁ AQUI: */
+        height: 55vh; /* Ocupa 55% da altura da tela */
+        width: auto;  /* A largura se ajusta sozinha */
+        aspect-ratio: 12 / 20; /* Força a proporção correta do Tetris */
+        
+        display: block;
+        border: 2px solid #0f0;
+        box-shadow: 0 0 10px #0f0;
     }
 
-    /* Dicas de texto somem */
     .controls-hint { display: none; }
 
-    /* 3. CONTROLES (Parte Inferior) */
+    /* --- 3. CONTROLES --- */
     #mobile-controls {
-        order: 2; /* Garante que fique abaixo do wrapper */
-        display: flex;
-        justify-content: space-evenly; /* Espalha melhor os botões */
-        align-items: center;
+        order: 2;
         width: 100%;
-        padding-bottom: 20px; /* Espaço para o polegar não bater na borda */
-        padding-top: 10px;
-        background: linear-gradient(to top, #000 0%, transparent 100%); /* Fundo sutil */
+        height: auto;
+        display: flex;
+        justify-content: center; /* Centraliza o bloco de botões */
+        align-items: flex-start;
+        gap: 40px; /* Separa direcional da rotação/descida */
+        padding-bottom: 20px;
+        margin-top: 10px;
     }
 
     .vertical-controls {
         display: flex;
         flex-direction: column;
-        gap: 20px; /* Mais espaço entre girar e descer */
+        gap: 15px;
     }
 
-    /* Botões maiores e mais fáceis de tocar */
+    /* Botões */
     .control-btn {
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-        background: rgba(13, 194, 255, 0.1); /* Azul neon translúcido */
+        width: 65px;
+        height: 65px;
+        font-size: 28px;
+        background: rgba(255, 255, 255, 0.05);
         border: 2px solid #0DC2FF;
         border-radius: 50%;
         color: #fff;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 0 0 15px rgba(13, 194, 255, 0.2);
-        backdrop-filter: blur(5px);
+        box-shadow: 0 0 10px rgba(13, 194, 255, 0.3);
+        /* Remove o delay do toque no iPhone */
+        touch-action: manipulation; 
     }
-    
+
     .control-btn:active {
         background: #0DC2FF;
-        transform: scale(0.9);
+        transform: scale(0.95);
     }
 }
