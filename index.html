@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Neon Vector Tetris Deluxe</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="main-container" id="main-shaker">
-        
+
+        <div id="mobile-controls">
+            <button id="btn-left" class="control-btn">◀</button>
+            <div class="vertical-controls">
+                <button id="btn-rotate" class="control-btn">↻</button>
+                <button id="btn-down" class="control-btn">▼</button>
+            </div>
+            <button id="btn-right" class="control-btn">▶</button>
+        </div>
+
+
         <div id="tetris-pop-text" class="pop-text hidden">TETRIS!</div>
 
         <div id="game-over-overlay" class="hidden">
@@ -27,7 +39,7 @@
                 <div class="stat-row">
                     <span class="label">NÍVEL</span>
                     <span id="level">1</span>
-                </div>                
+                </div>
             </div>
 
             <div class="controls-hint">
@@ -45,7 +57,9 @@
             </div>
         </div>
     </div>
-
+    <div class="game-wrapper">
+    </div>
     <script src="script.js"></script>
 </body>
+
 </html>

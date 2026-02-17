@@ -133,7 +133,6 @@ function collide(arena, player) {
 }
 
 // --- DESENHO ---
-
 function drawMatrix(ctx, matrix, offset) {
     matrix.forEach((row, y) => {
         row.forEach((value, x) => {
@@ -336,10 +335,14 @@ function update(time = 0) {
 }
 
 function updateScore() {
+    // Atualiza o texto dos pontos
     scoreElement.innerText = player.score.toString().padStart(4, '0');
-    player.level = Math.floor(player.score / 800) + 1;
+    
+    // Calcula o nível atual baseado nos pontos (cada 800 pontos = 1 nível)
+    player.level = Math.floor(player.score / 100) + 1;
     levelElement.innerText = player.level;
-    dropInterval = Math.max(100, 1000 - (player.level * 50)); 
+    const speedStage = Math.floor(player.level / 10);
+    dropInterval = Math.max(100, 1000 - (speedStage * 200)); 
 }
 
 document.addEventListener('keydown', event => {
@@ -356,6 +359,38 @@ document.addEventListener('keydown', event => {
         event.preventDefault();
     }
 });
+
+// --- CONTROLES MOBILE (TOUCH) ---
+
+function addTouchListener(id, action) {
+    const btn = document.getElementById(id);
+    if (!btn) return;
+
+    // Usa 'touchstart' para resposta imediata, e previne comportamento padrão (zoom/scroll)
+    btn.addEventListener('touchstart', (e) => {
+        e.preventDefault(); 
+        action();
+    }, { passive: false });
+
+    // Fallback para clique (caso teste no navegador desktop com modo mobile)
+    btn.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        action();
+    });
+}
+
+// Vincula os botões às funções do jogo existentes
+addTouchListener('btn-left', () => playerMove(-1));
+addTouchListener('btn-right', () => playerMove(1));
+addTouchListener('btn-rotate', () => playerRotate(1));
+addTouchListener('btn-down', () => playerDrop());
+
+// Previne rolagem da tela ao tocar nos botões
+document.addEventListener('touchmove', function(e) {
+    if (e.target.classList.contains('control-btn')) {
+        e.preventDefault();
+    }
+}, { passive: false });
 
 // INICIALIZAÇÃO
 playerReset();
