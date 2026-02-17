@@ -223,7 +223,8 @@ body {
         align-items: center;     /* Centraliza horizontalmente */
         width: 100%;
         height: 100%;
-        gap: 10px; /* Espaço entre HUD, Jogo e Botões */
+        margin-left: 50px;
+        gap: 6px; /* Espaço entre HUD, Jogo e Botões */
     }
 
     .game-wrapper {
