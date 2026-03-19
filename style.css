@@ -164,7 +164,7 @@ body {
     white-space: nowrap;
 }
 
-.hidden { display: none !important; /* Importante para garantir que suma */ }
+.hidden { display: none !important;}
 
 .pop-text.show {
     display: block;
@@ -333,5 +333,17 @@ body {
     .control-btn:active {
         background: #0DC2FF;
         transform: scale(0.95);
+    }
+
+    /* Botão Hard Drop */
+    .hard-drop-btn {
+        border-color: #FF0D72;
+        box-shadow: 0 0 10px rgba(255, 13, 114, 0.3);
+        font-size: 32px;
+        align-self: center;
+    }
+
+    .hard-drop-btn:active {
+        background: #FF0D72;
     }
 }

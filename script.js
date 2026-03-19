@@ -392,6 +392,26 @@ document.addEventListener('touchmove', function(e) {
     }
 }, { passive: false });
 
+// --- HARD DROP ---
+function hardDrop() {
+    if (isGameOver) return;
+    while (!collide(arena, player)) {
+        player.pos.y++;
+    }
+    player.pos.y--;
+    playerDrop();
+}
+
+addTouchListener('btn-hard-drop', () => hardDrop());
+
+document.addEventListener('keydown', event => {
+    if (event.key === ' ') {
+        if (isGameOver) return;
+        hardDrop();
+        event.preventDefault();
+    }
+});
+
 // INICIALIZAÇÃO
 playerReset();
 updateScore();
