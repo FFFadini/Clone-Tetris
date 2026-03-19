@@ -34,7 +34,7 @@
 
             <div class="controls-hint">
                 <p>Setas: Mover/Girar</p>
-                <p>Espaço: Hard Drop</p>
+                <p>Baixo: Descer</p>
             </div>
 
             <canvas id="tetris" width="480" height="800"></canvas>
@@ -48,12 +48,16 @@
         </div>
         
         <div id="mobile-controls">
-            <button id="btn-left" class="control-btn">◀</button>
-            <div class="vertical-controls">
-                <button id="btn-rotate" class="control-btn">↻</button>
-                <button id="btn-down" class="control-btn">▼</button>
+            <div class="dpad">
+                <div class="dpad-middle">
+                    <button id="btn-left" class="control-btn">◀</button>
+                    <div class="dpad-center-col">
+                        <button id="btn-rotate" class="control-btn">↻</button>
+                        <button id="btn-down" class="control-btn">▼</button>
+                    </div>
+                    <button id="btn-right" class="control-btn">▶</button>
+                </div>
             </div>
-            <button id="btn-right" class="control-btn">▶</button>
             <button id="btn-hard-drop" class="control-btn hard-drop-btn">⤓</button>
         </div>
 

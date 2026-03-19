@@ -298,20 +298,45 @@ body {
     #mobile-controls {
         order: 2;
         width: 100%;
-        height: auto;
         display: flex;
-        justify-content: center; /* Centraliza o bloco de botões */
-        align-items: flex-start;
-        gap: 40px; /* Separa direcional da rotação/descida */
-        padding-bottom: 20px;
-        margin-top: 10px;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding-bottom: 16px;
+        margin-top: 8px;
     }
 
-    .vertical-controls {
+    /* D-pad em cruz */
+    .dpad {
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        align-items: center;
+        gap: 6px;
     }
+
+    .dpad-top,
+    .dpad-bottom {
+        display: flex;
+        justify-content: center;
+    }
+
+    .dpad-middle {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Coluna central: rotate em cima, down embaixo */
+    .dpad-center-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+    }
+
+    /* Remove classes antigas */
+    .dpad-top, .dpad-bottom, .dpad-center,
+    .col-side, .col-center, .vertical-controls { display: none; }
 
     /* Botões */
     .control-btn {
@@ -326,8 +351,7 @@ body {
         justify-content: center;
         align-items: center;
         box-shadow: 0 0 10px rgba(13, 194, 255, 0.3);
-        /* Remove o delay do toque no iPhone */
-        touch-action: manipulation; 
+        touch-action: manipulation;
     }
 
     .control-btn:active {
@@ -335,12 +359,12 @@ body {
         transform: scale(0.95);
     }
 
-    /* Botão Hard Drop */
+    /* Botão Hard Drop — à direita, centralizado verticalmente pelo align-items do pai */
     .hard-drop-btn {
         border-color: #FF0D72;
         box-shadow: 0 0 10px rgba(255, 13, 114, 0.3);
         font-size: 32px;
-        align-self: center;
+        flex-shrink: 0;
     }
 
     .hard-drop-btn:active {
